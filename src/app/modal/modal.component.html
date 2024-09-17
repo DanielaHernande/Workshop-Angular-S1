@@ -1,0 +1,9 @@
+<div class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+    <div class="bg-white rounded-lg shadow-lg p-6 relative w-10/ sm:w-8/12 md:w-6/12 lg:w-4/12">
+        <button class="absolute top-2 right-2 text-black hover:text-red-700 text-3xl" (click)="onClose()">&times;</button>
+        <img [src]="image.url" alt="{{image.title}}" class="rounded-lg w-full h-64 object-cover mb-4">
+        <h3 class="text-2xl font-semibold mb-2 mt-2">{{image.title}}</h3>
+        <p class="text-gray-700">{{image.description}}</p>
+        <p class="mt-4"><strong>Category: </strong>{{image.category}}</p>
+    </div>
+</div>

@@ -1,0 +1,35 @@
+<select [(ngModel)]="filterCategory" class="font-semibold mb-4 p-2 border rounded">
+    <option value="All">All</option>
+    <option value="Arte">Art</option>
+    <option value="Flor">Flower</option>
+    <option value="Paisaje">Paisaje</option>
+    <option value="Animal">Animal</option>
+</select>
+
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 p-4">
+    <div *ngFor="let imagen of filterImagenes(filterCategory)" class="bg-white shadow-md rounded-lg overflow-hidden">
+        <img [src]="imagen.url" alt="{{imagen.title}}" class="w-full h-48 object-cover cursor-pointer" (click)="openModel(imagen)"> 
+        <div class="p-4">
+            <h3 class="text-lg font-semibold text-center">{{imagen.title}}</h3>
+            <button (click)="toggleFavorite(imagen)" class="mt-2 focus:outline-none">
+                <fa-icon [icon]="['fas', 'heart']" [ngClass]="{'text-red-600' : imagen.favorite, 'text-gray-800' : !imagen.favorite}"></fa-icon>
+            </button>
+        </div>
+    </div>
+</div>
+
+<app-modal *ngIf="selectImagen" [image]="selectImagen" (closeModel)="closeModal()"></app-modal>
+
+<h2 class="text-2xl font-bold mt-8 p-4">Favorite images</h2>
+<div *ngIf="favoriteImages.length; else noFavorites" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 p-4">
+    <div *ngFor="let imagen of favoriteImages" class="=bg-white shadow-md rounded-lg overflow-hidden">
+        <img [src]="imagen.url" alt="{{imagen.title}}" class="w-full h-48 object-cover">
+        <div>
+            <h3 class="text-lg font-semibold text-center mt-2">{{imagen.title}}</h3>
+        </div>
+    </div>
+</div>
+
+<ng-template #noFavorites>
+    <p class="text-gray-600">You have no favorite images yet</p>
+</ng-template>
